@@ -1,0 +1,165 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: #eef4f7;
+  font-family: Arial, sans-serif;
+  color: #18313d;
+}
+
+.container {
+  width: min(100% - 32px, 720px);
+  margin: 32px auto;
+  background-color: white;
+  padding: 28px;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(18, 48, 61, 0.12);
+}
+
+h1 {
+  text-align: center;
+  color: #0077b6;
+  font-size: 30px;
+  line-height: 1.2;
+  margin-bottom: 22px;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  font-size: 22px;
+  line-height: 1.25;
+  margin-bottom: 20px;
+}
+
+label {
+  display: inline-block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #213f4c;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.form-field {
+  min-width: 0;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #b9c8cf;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #142c36;
+  font-size: 15px;
+}
+
+input:focus {
+  border-color: #0077b6;
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.16);
+  outline: none;
+}
+
+input[readonly] {
+  background: #eef4f7;
+  color: #0f5d7c;
+  font-weight: bold;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 4px;
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005f87;
+}
+
+button:disabled {
+  background-color: #89a9b8;
+  cursor: not-allowed;
+}
+
+.toast {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  z-index: 10;
+  transform: translateX(-50%);
+  max-width: min(360px, calc(100% - 32px));
+  padding: 14px 16px;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(18, 48, 61, 0.18);
+  color: white;
+  font-weight: bold;
+  line-height: 1.35;
+}
+
+.toast.success {
+  background: #147d45;
+}
+
+.toast.error {
+  background: #b42318;
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: min(100% - 20px, 480px);
+    margin: 16px auto;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  input,
+  button {
+    font-size: 16px;
+  }
+
+  .toast {
+    top: 12px;
+    left: 50%;
+    max-width: none;
+    width: calc(100% - 20px);
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    width: min(100% - 12px, 340px);
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 21px;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "dev": "concurrently \"npm run start:dev --prefix ./backend\" \"npm run dev --prefix ./frontend\"",
+    "start": "concurrently \"npm start --prefix ./backend\" \"npm start --prefix ./frontend\""
+  },
+  "dependencies": {
+    "@nestjs/config": "^4.0.4",
+    "mongoose": "^9.7.3"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  }
+}
