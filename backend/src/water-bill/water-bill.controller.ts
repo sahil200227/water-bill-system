@@ -6,7 +6,10 @@ import {
   Param,
   Patch,
   Post,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateWaterBillDto } from './dto/create-water-bill.dto';
 import { UpdateWaterBillDto } from './dto/update-water-bill.dto';
 import { WaterBillService } from './water-bill.service';
@@ -23,6 +26,12 @@ export class WaterBillController {
   @Post()
   create(@Body() createWaterBillDto: CreateWaterBillDto) {
     return this.waterBillService.create(createWaterBillDto);
+  }
+
+  @Post('import')
+  @UseInterceptors(FileInterceptor('file'))
+  async importBills(@UploadedFile() file: Express.Multer.File) {
+    return this.waterBillService.importFile(file);
   }
 
   @Get(':id')

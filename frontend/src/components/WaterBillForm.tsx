@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { saveWaterBill as saveWaterBillRequest } from "../services/waterBillService";
 
 function WaterBillForm() {
   const [customerName, setCustomerName] = useState("");
@@ -51,17 +52,7 @@ function WaterBillForm() {
       setIsSaving(true);
       setMessage("");
 
-      const response = await fetch("http://localhost:3000/water-bill", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(waterBill),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to save water bill");
-      }
+      await saveWaterBillRequest(waterBill);
 
       setCustomerName("");
       setAccountNumber("");
@@ -72,8 +63,12 @@ function WaterBillForm() {
       setCurrentReading("");
       setWaterCharge("");
       showMessage("Water Bill Saved Successfully!", "success");
-    } catch {
-      showMessage("Unable to save water bill. Please check backend and DB.", "error");
+    } catch (error) {
+      console.error("Failed to save water bill", error);
+      showMessage(
+        error instanceof Error ? error.message : "Unable to save water bill. Please check backend and DB.",
+        "error",
+      );
     } finally {
       setIsSaving(false);
     }
