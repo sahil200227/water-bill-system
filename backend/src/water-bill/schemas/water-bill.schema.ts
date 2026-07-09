@@ -31,6 +31,15 @@ export class WaterBill {
 
   @Prop({ required: true, min: 0 })
   totalAmount: number;
+
+  @Prop({ default: false })
+  isPrivate?: boolean;
+
+  @Prop({ default: false })
+  deleted?: boolean;
+
+  @Prop()
+  deletedAt?: Date;
 }
 
 export const WaterBillSchema = SchemaFactory.createForClass(WaterBill);
