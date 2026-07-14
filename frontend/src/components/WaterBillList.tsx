@@ -131,28 +131,26 @@ function WaterBillList({ initialAdminView = false }: Props) {
     setEditingId(null);
   };
 
-  if (loading) return <div>Loading water bills...</div>;
-  if (error) return <div style={{ color: "red" }}>Error: {error}</div>;
+  if (loading) return <div className="loading-state">Loading water bills...</div>;
+  if (error) return <div className="empty-state">Unable to load records: {error}</div>;
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
-        <h2>Saved Water Bills</h2>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <div style={{ flex: '0 0 360px' }}>
+      <div className="list-heading">
+        <div><h2>All water bills</h2><p>Search, update, or remove customer billing records.</p></div>
+        <div>
             <input
               className="search-box"
               placeholder="Search by name, account, address…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
-          </div>
         </div>
       </div>
       {filtered.length === 0 ? (
-        <div>No records found.</div>
+        <div className="empty-state">No records found.</div>
       ) : (
-        <table className="bills-table">
+        <div className="table-wrap"><table className="bills-table">
           <thead>
             <tr>
               <th>Name</th>
@@ -266,7 +264,7 @@ function WaterBillList({ initialAdminView = false }: Props) {
               );
             })}
           </tbody>
-        </table>
+        </table></div>
       )}
       {toast && (
         <div className={`toast ${toast.type === 'success' ? 'success' : 'error'}`}>{toast.message}</div>

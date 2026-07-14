@@ -9,6 +9,7 @@ import { Model } from 'mongoose';
 import * as XLSX from 'xlsx';
 import { CreateWaterBillDto } from './dto/create-water-bill.dto';
 import { UpdateWaterBillDto } from './dto/update-water-bill.dto';
+import { RecordPaymentDto } from './dto/record-payment.dto';
 import { WaterBill, WaterBillDocument } from './schemas/water-bill.schema';
 
 @Injectable()
@@ -110,6 +111,33 @@ export class WaterBillService {
       this.logger.error(`Failed to update water bill ${id}`, error instanceof Error ? error.stack : undefined);
       throw error;
     }
+  }
+
+  async recordPayment(id: string, recordPaymentDto: RecordPaymentDto): Promise<WaterBill> {
+    const waterBill = await this.waterBillModel.findById(id).exec();
+    if (!waterBill) throw new NotFoundException('Water bill not found');
+
+    const amount = Number(recordPaymentDto.amount);
+    if (!Number.isFinite(amount) || amount <= 0) {
+      throw new BadRequestException('Payment amount must be greater than zero');
+    }
+
+    const alreadyPaid = (waterBill.payments ?? []).reduce((sum, payment) => sum + Number(payment.amount ?? 0), 0);
+    const remaining = Math.max(Number(waterBill.totalAmount ?? 0) - alreadyPaid, 0);
+    if (amount > remaining) {
+      throw new BadRequestException(`Payment cannot exceed the remaining balance of ${remaining}`);
+    }
+
+    waterBill.payments = [
+      ...(waterBill.payments ?? []),
+      {
+        amount,
+        method: recordPaymentDto.method?.trim() || 'Cash',
+        reference: recordPaymentDto.reference?.trim(),
+        paidAt: new Date(),
+      },
+    ];
+    return waterBill.save();
   }
 
   // Soft delete: mark as deleted but keep record

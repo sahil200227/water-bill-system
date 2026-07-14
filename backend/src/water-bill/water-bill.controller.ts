@@ -27,6 +27,7 @@ import {
 } from '@nestjs/swagger';
 import { CreateWaterBillDto } from './dto/create-water-bill.dto';
 import { UpdateWaterBillDto } from './dto/update-water-bill.dto';
+import { RecordPaymentDto } from './dto/record-payment.dto';
 import { WaterBillService } from './water-bill.service';
 import { AdminGuard } from '../common/guards/admin.guard';
 
@@ -120,6 +121,15 @@ export class WaterBillController {
     @Body() updateWaterBillDto: UpdateWaterBillDto,
   ) {
     return this.waterBillService.update(id, updateWaterBillDto);
+  }
+
+  @Post(':id/payments')
+  @ApiOperation({ summary: 'Record a payment against a water bill' })
+  @ApiParam({ name: 'id', description: 'Water bill ID' })
+  @ApiBody({ type: RecordPaymentDto })
+  @ApiResponse({ status: 201, description: 'Payment recorded successfully' })
+  recordPayment(@Param('id') id: string, @Body() recordPaymentDto: RecordPaymentDto) {
+    return this.waterBillService.recordPayment(id, recordPaymentDto);
   }
 
   @Delete(':id')

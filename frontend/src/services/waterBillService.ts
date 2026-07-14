@@ -77,6 +77,21 @@ export async function updateWaterBill(id: string, payload: Record<string, unknow
   return response.json();
 }
 
+export async function recordWaterBillPayment(id: string, payload: Record<string, unknown>) {
+  const response = await fetch(`${API_URL}/${id}/payments`, {
+    method: 'POST',
+    headers: buildHeaders(true),
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(errorData?.message || 'Failed to record payment');
+  }
+
+  return response.json();
+}
+
 export async function deleteWaterBill(id: string) {
   const response = await fetch(`${API_URL}/${id}`, {
     method: 'DELETE',

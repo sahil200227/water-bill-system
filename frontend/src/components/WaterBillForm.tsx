@@ -75,9 +75,7 @@ function WaterBillForm() {
   };
 
   return (
-    <div>
-      <h2>Add Water Bill</h2>
-
+    <div className="water-bill-form">
       <div className="form-grid">
         <div className="form-field">
           <label>Customer Name</label>
@@ -168,9 +166,9 @@ function WaterBillForm() {
         </div>
       </div>
 
-      <button onClick={saveWaterBill} disabled={isSaving}>
+      <div className="form-actions"><span>Fields marked with accurate readings calculate the total automatically.</span><button onClick={saveWaterBill} disabled={isSaving}>
         {isSaving ? "Saving..." : "Save Water Bill"}
-      </button>
+      </button></div>
 
       {message && <div className={`toast ${messageType}`}>{message}</div>}
     </div>

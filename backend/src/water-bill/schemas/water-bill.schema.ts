@@ -3,6 +3,13 @@ import { HydratedDocument } from 'mongoose';
 
 export type WaterBillDocument = HydratedDocument<WaterBill>;
 
+export type PaymentRecord = {
+  amount: number;
+  method?: string;
+  reference?: string;
+  paidAt: Date;
+};
+
 @Schema({ timestamps: true })
 export class WaterBill {
   @Prop({ required: true, trim: true })
@@ -31,6 +38,12 @@ export class WaterBill {
 
   @Prop({ required: true, min: 0 })
   totalAmount: number;
+
+  @Prop({
+    type: [{ amount: Number, method: String, reference: String, paidAt: Date }],
+    default: [],
+  })
+  payments?: PaymentRecord[];
 
   @Prop({ default: false })
   isPrivate?: boolean;

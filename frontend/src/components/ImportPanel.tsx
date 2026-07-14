@@ -60,25 +60,16 @@ function ImportPanel({ onImported }: ImportPanelProps) {
   };
 
   return (
-    <div className="import-panel" style={{ display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'flex-start' }}>
+    <div className="import-panel">
       <button
         type="button"
         onClick={() => fileInputRef.current?.click()}
         disabled={isImporting}
-        style={{
-          backgroundColor: '#f3f4f6',
-          color: '#374151',
-          border: '1px solid #d1d5db',
-          borderRadius: '4px',
-          padding: '4px 8px',
-          cursor: 'pointer',
-          fontSize: '12px',
-          minWidth: '90px',
-        }}
+        className="secondary-button"
       >
         Choose File
       </button>
-      <div style={{ fontSize: '12px', color: '#6b7280' }}>
+      <div className="import-hint">
         {selectedFileName ? `Selected: ${selectedFileName}` : 'CSV / Excel files only'}
       </div>
       <input

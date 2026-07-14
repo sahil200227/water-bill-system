@@ -1,23 +1,19 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import ImportPanel from './components/ImportPanel';
-import WaterBillForm from './components/WaterBillForm';
-import AdminPage from './pages/AdminPage';
+import BillsPage from './pages/BillsPage';
+import OverviewPage from './pages/OverviewPage';
+import UsagePage from './pages/UsagePage';
+import PaymentsPage from './pages/PaymentsPage';
 
 function App() {
   const getRoute = () => {
-    if (typeof window === 'undefined') {
-      return 'home';
-    }
+    if (typeof window === 'undefined') return 'overview';
 
-    const pathname = window.location.pathname;
-    const hash = window.location.hash;
-
-    if (pathname === '/admin' || pathname === '/admin/' || hash === '#/admin') {
-      return 'admin';
-    }
-
-    return 'home';
+    const { pathname, hash } = window.location;
+    if (pathname === '/bills' || pathname === '/bills/' || pathname === '/admin' || pathname === '/admin/' || hash === '#/bills' || hash === '#/admin') return 'bills';
+    if (pathname === '/usage' || pathname === '/usage/' || hash === '#/usage') return 'usage';
+    if (pathname === '/payments' || pathname === '/payments/' || hash === '#/payments') return 'payments';
+    return 'overview';
   };
 
   const [route, setRoute] = useState(getRoute());
@@ -32,20 +28,10 @@ function App() {
     };
   }, []);
 
-  if (route === 'admin') {
-    return <AdminPage />;
-  }
-
-  return (
-    <div className="container">
-      <h1>Water Bill Management System</h1>
-
-      <ImportPanel />
-      <WaterBillForm />
-
-      <p style={{ textAlign: 'center', marginTop: 18 }} />
-    </div>
-  );
+  if (route === 'bills') return <BillsPage />;
+  if (route === 'usage') return <UsagePage />;
+  if (route === 'payments') return <PaymentsPage />;
+  return <OverviewPage />;
 }
 
 export default App;
