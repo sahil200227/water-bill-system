@@ -1,0 +1,261 @@
+2026-07-16 11:59:45 | INFO     | app.preprocessing.pdf_converter | Converting PDF to images at 300 DPI
+2026-07-16 11:59:46 | INFO     | app.preprocessing.pdf_converter | Successfully converted 1 page(s) from PDF
+2026-07-16 11:59:46 | INFO     | app.preprocessing.image_preprocessor | Starting image preprocessing pipeline (size: 2550x3300)
+2026-07-16 11:59:47 | INFO     | app.preprocessing.image_preprocessor | Preprocessing complete. Original: (3300, 2550) → Final: (3300, 2550)
+2026-07-16 11:59:47 | INFO     | app.ocr.paddle_ocr_engine | Processing document with 1 page(s)
+2026-07-16 11:59:47 | INFO     | app.ocr.paddle_ocr_engine | Running PaddleOCR on page 1 (size: 2550x3300)
+2026-07-16 11:59:47 | INFO     | app.ocr.paddle_ocr_engine | Initializing PaddleOCR engine...
+2026-07-16 11:59:58 | INFO     | app.ocr.paddle_ocr_engine | Forced Paddle device to CPU
+2026-07-16 12:00:01 | INFO     | app.ocr.paddle_ocr_engine | PaddleOCR engine initialized
+2026-07-16 12:00:29 | INFO     | app.ocr.paddle_ocr_engine | Page 1: 124 text blocks extracted (avg confidence: 0.983)
+2026-07-16 12:00:29 | INFO     | app.ocr.paddle_ocr_engine | Document OCR complete: 1 pages, 124 total text blocks
+--- OCR TEXT ---
+Town of Little Elm
+***FAILURE TO RECEIVE BILL
+Final Utility Bill
+DOES NOT EXEMPT
+CUSTOMER COPY
+100 W Eldorado Parkway
+CONSUMER FROM
+Little EIm, TX 75068
+ RESPONSIBILITY TO MAKE
+After Hours/Emergency (214)975-0480
+PAYMENT**
+Website: www.LittleElm.gov
+(214) 975-0480
+LITTLE ELM
+www.LittleElm.gov
+Office Hours: Monday-Thursday, 7:30 a.m.-5:30 p.m.
+CUSTOMER NAME
+CUSTOMER #
+SERVICE LOCATION
+ARIF HARSATH
+136937
+2601 TEAL COVE LN
+BILL #
+BILL DATE
+ACCOUNT #
+ACCOUNT TYPE
+DUE DATE
+202104
+02/05/2026
+ 0440000800
+RESIDENTIAL
+03/23/2026
+DESCRIPTION
+NUMBER
+METER
+READ PREVIOUS
+ READ DATE
+CURRENT
+PREVIOUS
+READING
+CURRENT
+READING
+USAGE
+UOM
+CHARGE
+AMOUNT
+WATER
+7206864
+3
+01/12/2026 01/30/2026
+76
+77
+1
+TGA
+$29.25
+ SEWER
+$49.57
+REFUSE
+$26.63
+TAX
+$2.20
+ DRAINAGE FEE
+$3.35
+IMPORTANT MESSAGE
+CONSUMPTION HISTORY
+READ CODE
+Previous Balance
+$233.11
+A = Actual
+F = Final
+Total Current Billing
+$111.00
+Adjustments
+$0.00
+0.8
+Less Payments Received
+$0.00
+0.6
+ Deposit Applied
+$200.00
+0.4
+ Penalties
+$0.00
+Total Amount Due
+$144.11
+0.2
+0
+CURR 01/26
+11/25
+10/25 09/25 08/25
+ DetACh And Return ThE PORtIOn beLOw WIth yOur PAyment >%E
+Final Utility Bill
+REMIT PORTION
+Town of Little Elm
+***FAILURE TO RECEIVE BILL
+DOES NOT EXEMPT
+100 W Eldorado Parkway
+CONSUMER FROM
+Please add your Account Number on your check and enclose this
+Little EIm, TX 75068
+RESPONSIBILITY TO MAKE
+LITTLE ELM
+(214) 975-0480
+PAYMENT***
+portion of the bill with your payment.
+www.LittleElm.gov
+BILL #
+CUSTOMER #
+ACCOUNT #
+DUE DATE
+AFTER DUE DATE
+TOTAL DUE
+202104
+136937
+0440000800
+03/23/2026
+$144.11
+MAKE CHECKS PAYABLE AND REMIT TO:
+ARIF HARSATH
+1180 MARQUETTE DR
+Town of Little Elm
+FRISCO, TX 75033
+100 W Eldorado Parkway
+Little Elm, TX 75068
+--- BLOCKS ---
+Block: Town of Little Elm (bbox: [506, 96, 877, 141])
+Block: ***FAILURE TO RECEIVE BILL (bbox: [1067, 89, 1362, 124])
+Block: Final Utility Bill (bbox: [2107, 89, 2467, 134])
+Block: DOES NOT EXEMPT (bbox: [1064, 127, 1272, 162])
+Block: CUSTOMER COPY (bbox: [2207, 138, 2467, 175])
+Block: 100 W Eldorado Parkway (bbox: [502, 158, 883, 203])
+Block: CONSUMER FROM (bbox: [1064, 162, 1261, 196])
+Block: Little EIm, TX 75068 (bbox: [502, 206, 814, 251])
+Block:  RESPONSIBILITY TO MAKE (bbox: [1064, 199, 1334, 234])
+Block: After Hours/Emergency (214)975-0480 (bbox: [1871, 189, 2470, 234])
+Block: PAYMENT** (bbox: [1067, 241, 1195, 265])
+Block: Website: www.LittleElm.gov (bbox: [2030, 230, 2470, 279])
+Block: (214) 975-0480 (bbox: [506, 251, 741, 289])
+Block: LITTLE ELM (bbox: [222, 306, 430, 344])
+Block: www.LittleElm.gov (bbox: [502, 292, 783, 334])
+Block: Office Hours: Monday-Thursday, 7:30 a.m.-5:30 p.m. (bbox: [1660, 272, 2470, 316])
+Block: CUSTOMER NAME (bbox: [170, 395, 437, 430])
+Block: CUSTOMER # (bbox: [1154, 395, 1351, 430])
+Block: SERVICE LOCATION (bbox: [2165, 395, 2460, 430])
+Block: ARIF HARSATH (bbox: [166, 474, 388, 509])
+Block: 136937 (bbox: [1198, 470, 1304, 520])
+Block: 2601 TEAL COVE LN (bbox: [2172, 478, 2460, 512])
+Block: BILL # (bbox: [166, 581, 267, 619])
+Block: BILL DATE (bbox: [780, 584, 942, 619])
+Block: ACCOUNT # (bbox: [1289, 584, 1462, 619])
+Block: ACCOUNT TYPE (bbox: [1708, 584, 1944, 619])
+Block: DUE DATE (bbox: [2304, 584, 2460, 619])
+Block: 202104 (bbox: [166, 667, 277, 701])
+Block: 02/05/2026 (bbox: [783, 667, 939, 701])
+Block:  0440000800 (bbox: [1285, 667, 1459, 701])
+Block: RESIDENTIAL (bbox: [1725, 667, 1923, 701])
+Block: 03/23/2026 (bbox: [2304, 667, 2460, 701])
+Block: DESCRIPTION (bbox: [166, 763, 371, 801])
+Block: NUMBER (bbox: [762, 784, 894, 818])
+Block: METER (bbox: [769, 749, 880, 784])
+Block: READ PREVIOUS (bbox: [956, 749, 1230, 784])
+Block:  READ DATE (bbox: [1046, 787, 1233, 811])
+Block: CURRENT (bbox: [1261, 749, 1421, 784])
+Block: PREVIOUS (bbox: [1466, 749, 1618, 784])
+Block: READING (bbox: [1472, 784, 1608, 818])
+Block: CURRENT (bbox: [1670, 749, 1815, 784])
+Block: READING (bbox: [1673, 784, 1812, 818])
+Block: USAGE (bbox: [1895, 763, 2010, 801])
+Block: UOM (bbox: [2113, 763, 2193, 804])
+Block: CHARGE (bbox: [2328, 749, 2463, 784])
+Block: AMOUNT (bbox: [2332, 784, 2460, 818])
+Block: WATER (bbox: [159, 828, 312, 877])
+Block: 7206864 (bbox: [748, 832, 901, 870])
+Block: 3 (bbox: [987, 835, 1043, 863])
+Block: 01/12/2026 01/30/2026 (bbox: [1029, 828, 1441, 873])
+Block: 76 (bbox: [1514, 828, 1566, 873])
+Block: 77 (bbox: [1715, 828, 1774, 877])
+Block: 1 (bbox: [1933, 832, 1964, 870])
+Block: TGA (bbox: [2105, 820, 2205, 881])
+Block: $29.25 (bbox: [2335, 825, 2463, 873])
+Block:  SEWER (bbox: [155, 927, 316, 984])
+Block: $49.57 (bbox: [2335, 935, 2467, 983])
+Block: REFUSE (bbox: [152, 982, 330, 1039])
+Block: $26.63 (bbox: [2335, 990, 2470, 1038])
+Block: TAX (bbox: [159, 1045, 246, 1086])
+Block: $2.20 (bbox: [2356, 1045, 2467, 1093])
+Block:  DRAINAGE FEE (bbox: [159, 1100, 454, 1145])
+Block: $3.35 (bbox: [2356, 1100, 2467, 1148])
+Block: IMPORTANT MESSAGE (bbox: [166, 1382, 592, 1427])
+Block: CONSUMPTION HISTORY (bbox: [610, 1609, 963, 1643])
+Block: READ CODE (bbox: [1431, 1595, 1660, 1643])
+Block: Previous Balance (bbox: [1777, 1605, 2016, 1640])
+Block: $233.11 (bbox: [2356, 1602, 2474, 1640])
+Block: A = Actual (bbox: [1434, 1647, 1625, 1684])
+Block: F = Final (bbox: [1427, 1677, 1595, 1733])
+Block: Total Current Billing (bbox: [1774, 1670, 2045, 1716])
+Block: $111.00 (bbox: [2353, 1671, 2477, 1719])
+Block: Adjustments (bbox: [1777, 1750, 1947, 1788])
+Block: $0.00 (bbox: [2387, 1746, 2474, 1788])
+Block: 0.8 (bbox: [149, 1767, 211, 1812])
+Block: Less Payments Received (bbox: [1777, 1822, 2113, 1856])
+Block: $0.00 (bbox: [2387, 1818, 2474, 1860])
+Block: 0.6 (bbox: [149, 1873, 211, 1918])
+Block:  Deposit Applied (bbox: [1774, 1891, 1989, 1925])
+Block: $200.00 (bbox: [2351, 1879, 2475, 1936])
+Block: 0.4 (bbox: [149, 1977, 211, 2021])
+Block:  Penalties (bbox: [1774, 1959, 1912, 2008])
+Block: $0.00 (bbox: [2387, 1963, 2474, 2004])
+Block: Total Amount Due (bbox: [1774, 2031, 2034, 2073])
+Block: $144.11 (bbox: [2348, 2024, 2472, 2084])
+Block: 0.2 (bbox: [149, 2083, 211, 2128])
+Block: 0 (bbox: [173, 2190, 215, 2231])
+Block: CURR 01/26 (bbox: [225, 2221, 405, 2258])
+Block: 11/25 (bbox: [515, 2216, 604, 2263])
+Block: 10/25 09/25 08/25 (bbox: [624, 2217, 897, 2262])
+Block:  DetACh And Return ThE PORtIOn beLOw WIth yOur PAyment >%E (bbox: [800, 2255, 1739, 2303])
+Block: Final Utility Bill (bbox: [2107, 2300, 2467, 2348])
+Block: REMIT PORTION (bbox: [2217, 2351, 2456, 2386])
+Block: Town of Little Elm (bbox: [395, 2379, 766, 2423])
+Block: ***FAILURE TO RECEIVE BILL (bbox: [1088, 2372, 1386, 2417])
+Block: DOES NOT EXEMPT (bbox: [1088, 2409, 1296, 2451])
+Block: 100 W Eldorado Parkway (bbox: [395, 2441, 776, 2485])
+Block: CONSUMER FROM (bbox: [1091, 2451, 1289, 2485])
+Block: Please add your Account Number on your check and enclose this (bbox: [1569, 2454, 2453, 2489])
+Block: Little EIm, TX 75068 (bbox: [392, 2489, 703, 2533])
+Block: RESPONSIBILITY TO MAKE (bbox: [1095, 2492, 1355, 2516])
+Block: LITTLE ELM (bbox: [211, 2516, 360, 2551])
+Block: (214) 975-0480 (bbox: [391, 2530, 631, 2575])
+Block: PAYMENT*** (bbox: [1091, 2523, 1233, 2557])
+Block: portion of the bill with your payment. (bbox: [1937, 2502, 2450, 2537])
+Block: www.LittleElm.gov (bbox: [391, 2575, 672, 2616])
+Block: BILL # (bbox: [1029, 2595, 1129, 2633])
+Block: CUSTOMER # (bbox: [1202, 2599, 1400, 2633])
+Block: ACCOUNT # (bbox: [1476, 2595, 1653, 2633])
+Block: DUE DATE (bbox: [1729, 2599, 1885, 2633])
+Block: AFTER DUE DATE (bbox: [1964, 2599, 2224, 2633])
+Block: TOTAL DUE (bbox: [2290, 2595, 2460, 2633])
+Block: 202104 (bbox: [1022, 2685, 1129, 2722])
+Block: 136937 (bbox: [1237, 2681, 1344, 2719])
+Block: 0440000800 (bbox: [1469, 2681, 1639, 2719])
+Block: 03/23/2026 (bbox: [1722, 2681, 1878, 2719])
+Block: $144.11 (bbox: [2339, 2681, 2456, 2719])
+Block: MAKE CHECKS PAYABLE AND REMIT TO: (bbox: [1403, 2826, 1985, 2860])
+Block: ARIF HARSATH (bbox: [229, 2860, 540, 2905])
+Block: 1180 MARQUETTE DR (bbox: [232, 2912, 672, 2956])
+Block: Town of Little Elm (bbox: [1511, 2922, 1847, 2967])
+Block: FRISCO, TX 75033 (bbox: [229, 2967, 596, 3011])
+Block: 100 W Eldorado Parkway (bbox: [1510, 2966, 1986, 3022])
+Block: Little Elm, TX 75068 (bbox: [1507, 3025, 1892, 3070])

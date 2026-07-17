@@ -1,0 +1,15 @@
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+paddleocr>=2.7.0
+opencv-python-headless>=4.8.0
+pdf2image>=1.16.3
+mistralai>=1.0.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+python-dotenv>=1.0.0
+Pillow>=10.0.0
+httpx>=0.25.0
+pytest>=7.4.0
+pymongo>=4.6.0
+dnspython>=2.4.0
