@@ -1,4 +1,5 @@
 const API_URL = 'http://localhost:3000/water-bill';
+const EXTRACTOR_URL = 'http://localhost:8004';
 
 export type WaterBillResponse = {
   _id: string;
@@ -144,4 +145,46 @@ export async function getOcrWaterBills() {
   // The OCR service returns `{ value, Count }`; normalize it to a record array
   // so Dashboard and Bills populate automatically when the AI/ML API sends data.
   return Array.isArray(data) ? data : Array.isArray(data?.value) ? data.value : [];
+}
+
+/**
+ * Send a PDF or image file to the Python bill_extractor AI service.
+ * Returns a structured WaterBillResponse with all extracted fields.
+ */
+export async function extractBillFromPdf(file: File) {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const response = await fetch(`${EXTRACTOR_URL}/extract-water-bill`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(
+      errorData?.detail || errorData?.error || `Extraction failed (${response.status})`
+    );
+  }
+
+  return response.json();
+}
+
+/**
+ * Save the structured extraction result from bill_extractor into the
+ * NestJS backend via the OCR endpoint, so it appears in the bills table.
+ */
+export async function saveBillOcr(extractedData: Record<string, unknown>) {
+  const response = await fetch(`${API_URL}/ocr`, {
+    method: 'POST',
+    headers: buildHeaders(true),
+    body: JSON.stringify(extractedData),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(errorData?.message || 'Failed to save extracted bill');
+  }
+
+  return response.json();
 }
