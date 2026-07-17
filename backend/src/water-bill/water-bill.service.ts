@@ -8,9 +8,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as XLSX from 'xlsx';
 import { CreateWaterBillDto } from './dto/create-water-bill.dto';
+import { OcrWaterBillDto } from './dto/ocr-water-bill.dto';
 import { UpdateWaterBillDto } from './dto/update-water-bill.dto';
 import { RecordPaymentDto } from './dto/record-payment.dto';
 import { WaterBill, WaterBillDocument } from './schemas/water-bill.schema';
+import {
+  OcrWaterBill,
+  OcrWaterBillDocument,
+} from './schemas/ocr-water-bill.schema';
 
 @Injectable()
 export class WaterBillService {
@@ -19,6 +24,8 @@ export class WaterBillService {
   constructor(
     @InjectModel(WaterBill.name)
     private readonly waterBillModel: Model<WaterBillDocument>,
+    @InjectModel(OcrWaterBill.name)
+private readonly ocrWaterBillModel: Model<OcrWaterBillDocument>,
   ) {}
 
   async create(createWaterBillDto: CreateWaterBillDto): Promise<WaterBill> {
@@ -215,21 +222,51 @@ export class WaterBillService {
   }
 
   async importFile(file: Express.Multer.File): Promise<{ message: string; imported: number }> {
-    if (!file?.buffer?.length) {
-      throw new BadRequestException('Please upload a CSV or Excel file');
-    }
-
-    try {
-      const workbook = XLSX.read(file.buffer, { type: 'buffer' });
-      const sheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[sheetName];
-      const rows = XLSX.utils.sheet_to_json(worksheet, { defval: '' }) as CreateWaterBillDto[];
-
-      const created = await this.importRecords(rows);
-      return { message: 'Water bills imported successfully', imported: created.length };
-    } catch (error) {
-      this.logger.error('Failed to import water bills from file', error instanceof Error ? error.stack : undefined);
-      throw error;
-    }
+  if (!file?.buffer?.length) {
+    throw new BadRequestException('Please upload a CSV or Excel file');
   }
+
+  try {
+    const workbook = XLSX.read(file.buffer, { type: 'buffer' });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+    const rows = XLSX.utils.sheet_to_json(
+      worksheet,
+      { defval: '' },
+    ) as CreateWaterBillDto[];
+
+    const created = await this.importRecords(rows);
+
+    return {
+      message: 'Water bills imported successfully',
+      imported: created.length,
+    };
+  } catch (error) {
+    this.logger.error(
+      'Failed to import water bills from file',
+      error instanceof Error ? error.stack : undefined,
+    );
+    throw error;
+  }
+}
+
+async receiveOcrData(ocrWaterBillDto: OcrWaterBillDto) {
+  this.logger.log('OCR data received');
+
+  const savedBill = new this.ocrWaterBillModel(ocrWaterBillDto);
+
+  await savedBill.save();
+
+  return {
+    message: 'OCR data saved successfully',
+    data: savedBill,
+  };
+}
+async getOcrData() {
+  return this.ocrWaterBillModel.find().sort({ createdAt: -1 }).exec();
+}
+
+async deleteOcrData(id: string) {
+  return this.ocrWaterBillModel.findByIdAndDelete(id).exec();
+}
 }

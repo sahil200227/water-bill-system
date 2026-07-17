@@ -26,6 +26,7 @@ import {
   ApiSecurity,
 } from '@nestjs/swagger';
 import { CreateWaterBillDto } from './dto/create-water-bill.dto';
+import { OcrWaterBillDto } from './dto/ocr-water-bill.dto';
 import { UpdateWaterBillDto } from './dto/update-water-bill.dto';
 import { RecordPaymentDto } from './dto/record-payment.dto';
 import { WaterBillService } from './water-bill.service';
@@ -57,6 +58,28 @@ export class WaterBillController {
   @ApiResponse({ status: 201, description: 'Water bill created successfully' })
   create(@Body() createWaterBillDto: CreateWaterBillDto) {
     return this.waterBillService.create(createWaterBillDto);
+  }
+@Post('ocr')
+receiveOcrData(@Body() ocrWaterBillDto: OcrWaterBillDto) {
+  return this.waterBillService.receiveOcrData(ocrWaterBillDto);
+}
+@Get('ocr')
+@ApiOperation({ summary: 'Get all OCR water bill records' })
+@ApiResponse({
+  status: 200,
+  description: 'OCR water bill records retrieved successfully',
+})
+getOcrData() {
+  return this.waterBillService.getOcrData();
+}
+
+  @UseGuards(AdminGuard)
+  @Delete('ocr/:id')
+  @ApiOperation({ summary: 'Permanently delete an OCR water bill record (requires admin key)' })
+  @ApiParam({ name: 'id', description: 'OCR water bill record ID' })
+  @ApiHeader({ name: 'x-admin-key', required: true, description: 'Admin secret key' })
+  deleteOcrData(@Param('id') id: string) {
+    return this.waterBillService.deleteOcrData(id);
   }
 
   @Post('import')

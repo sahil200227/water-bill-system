@@ -1,5 +1,15 @@
 const API_URL = 'http://localhost:3000/water-bill';
 
+export type WaterBillResponse = {
+  _id: string;
+  customerName: string;
+  accountNumber: string;
+  serviceAddress: string;
+  billingDate: string;
+  dueDate: string;
+  totalAmount: number;
+};
+
 function getAdminKey() {
   try {
     return typeof window !== 'undefined' ? sessionStorage.getItem('adminKey') : null;
@@ -50,7 +60,7 @@ export async function importWaterBills(file: File) {
   return response.json();
 }
 
-export async function getAllWaterBills(includeHidden = false) {
+export async function getAllWaterBills(includeHidden = false): Promise<WaterBillResponse[]> {
   const url = includeHidden ? `${API_URL}?admin=true` : API_URL;
   const response = await fetch(url, { headers: buildHeaders(false) });
 
@@ -59,7 +69,7 @@ export async function getAllWaterBills(includeHidden = false) {
     throw new Error(errorData?.message || 'Failed to fetch water bills');
   }
 
-  return response.json();
+  return response.json() as Promise<WaterBillResponse[]>;
 }
 
 export async function updateWaterBill(id: string, payload: Record<string, unknown>) {
@@ -118,4 +128,20 @@ export async function hardDeleteWaterBill(id: string) {
   }
 
   return response.json();
+}
+export async function getOcrWaterBills() {
+  const response = await fetch(`${API_URL}/ocr`, {
+    method: 'GET',
+    headers: buildHeaders(false),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(errorData?.message || 'Failed to fetch OCR water bills');
+  }
+
+  const data = await response.json();
+  // The OCR service returns `{ value, Count }`; normalize it to a record array
+  // so Dashboard and Bills populate automatically when the AI/ML API sends data.
+  return Array.isArray(data) ? data : Array.isArray(data?.value) ? data.value : [];
 }
